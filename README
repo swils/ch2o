@@ -3,13 +3,18 @@ PREREQUISITES
 
 This version is known to compile with:
 
- - Coq 8.13.2 or higher
+ - Coq 8.13.2
  - SCons 4.0.1.post1
  - OCaml 4.12
  - OCaml-Num 1.4.2
  - OCamlbuild 0.14.0
  - GNU C preprocessor 8.3.0
  - stdpp 1.7.0
+
+Note: when building OCaml 4.02.3 from source on macOS with Xcode 12 or
+newer, run
+
+    ./configure -cc "gcc -Wno-error=implicit-function-declaration"
 
 BUILDING INSTRUCTIONS
 ---------------------
