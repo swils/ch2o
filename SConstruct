@@ -5,7 +5,7 @@ import os, glob, string
 modules = ["prelude", "separation", "types", "memory", "refinements",
   "memory_refinements", "memory_separation", "core_c", "abstract_c",
   "axiomatic", "extraction"]
-Rs = '-R . ch2o'
+Rs = '-R . ch2o -exclude-dir _opam'
 env = DefaultEnvironment(ENV = os.environ,tools=['default', 'Coq'], COQFLAGS=Rs)
 
 # Coq dependencies
