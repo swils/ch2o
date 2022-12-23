@@ -960,6 +960,12 @@ let term_of_decls ds =
 let print_decls ds =
   open_vbox 0;
   open_hovbox 2;
+  print_string "From Coq Require Import String.\n";
+  print_string "From ch2o Require Import frontend.\n";
+  print_string "\n";
+  print_string "#[local] Open Scope string_scope.\n";
+  print_string "#[local] Open Scope Z_scope.\n";
+  print_string "\n";
   print_string "Definition decls: list (string * decl) :=";
   print_space ();
   print_term false (term_of_decls ds);
