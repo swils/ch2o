@@ -3,26 +3,40 @@ name: "coq-ch2o"
 version: "0.1"
 synopsis: "A formalization of ISO C11 in Coq"
 description: """
-The CH2O project aims at formalizing novel features of the ISO C11 standard 
-of the C programming language. CH2O provides an operational, executable, and 
+The CH2O project aims at formalizing novel features of the ISO C11 standard
+of the C programming language. CH2O provides an operational, executable, and
 axiomatic semantics for a significant fragment of C11.
 
-Our recent paper A Typed C11 Semantics for Interactive Theorem Proving at CPP 
+Our recent paper A Typed C11 Semantics for Interactive Theorem Proving at CPP
 2015 gives a good overview of the CH2O project.
 """
 authors: "Robbert Krebbers"
 maintainer: "Robbert Krebbers"
-license: "BSD"
+license: "BSD-3-Clause"
 homepage: "https://robbertkrebbers.nl/research/ch2o/"
 bug-reports: "https://github.com/robbertkrebbers/ch2o/issues"
-dev-repo: "https://github.com/robbertkrebbers/ch2o"
-depends: [ 
-  "ocaml" 
-  "ocamlfind" 
-  "ocamlbuild" 
-  "coq" { (>= "8.13.2" & < "8.15~") | (= "dev") } 
-  "num" 
-  "coq-stdpp" { >= "1.6" | (= "dev") }
+dev-repo: "git+https://github.com/robbertkrebbers/ch2o"
+depends: [
+  "ocaml"
+  "ocamlfind"
+  "ocamlbuild"
+  "coq" { (>= "8.15~" & < "8.16~") | (= "dev") }
+  "num"
+  "coq-stdpp" { >= "1.7" | (= "dev") }
 ]
-build: [make "-j%{jobs}%"]
-install: [make "install"]
+# "build-env" appears to be broken? It doesn't do any variable expansion.
+# So we pass required environment variables explicitly into make.
+build: [
+  [
+    make "-j" jobs
+    "INSTALL_DIR_INCLUDE=%{_:share}%"
+    "INSTALL_DIR_BIN=%{_:bin}%"
+  ]
+]
+install: [
+  [
+    make "install"
+    "INSTALL_DIR_INCLUDE=%{_:share}%"
+    "INSTALL_DIR_BIN=%{_:bin}%"
+  ]
+]
